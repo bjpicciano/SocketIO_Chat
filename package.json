@@ -1,0 +1,15 @@
+{
+  "name": "socketio_chat",
+  "version": "1.0.0",
+  "description": "A simple console based real time chat application",
+  "main": "server.js",
+  "scripts": {
+    "start": "node ."
+  },
+  "author": "Brian Picciano",
+  "dependencies": {
+    "express": "*",
+    "socket.io": "*"
+  },
+  "license": "MIT"
+}
