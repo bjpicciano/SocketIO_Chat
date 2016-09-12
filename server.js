@@ -1,6 +1,5 @@
 var express = require('express');
 var app = express();
-var server = require('http').createServer(app);
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
@@ -19,7 +18,7 @@ function setEventHandlers(socket) {
     sockets[socket.id] = socket;
     
     socket.on('disconnect', function () {
-        var message = socket.username + " has disconnected.";
+        var message = socket.username + " has disconnected ";
 
         console.log(message);
         socket.broadcast.emit('say', message);
@@ -31,7 +30,7 @@ function setEventHandlers(socket) {
 
     socket.on('handshake', function (name) {
         socket.username = name;
-        var message = socket.username + " has connected.";
+        var message = socket.username + " has connected";
 
         console.log(message);
         socket.broadcast.emit('say', message);

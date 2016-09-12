@@ -1,6 +1,6 @@
 # Socket.io Chat
 
-A simple console based real time chat application
+A simple real time chat application
 
 ## Requirements
 - NodeJS / NPM
@@ -13,4 +13,4 @@ A simple console based real time chat application
 
 ## Running the server
 - Run the server with `npm start` command or by running the 'start_server.bat' file
-- Go to `http://localhost:3000/` and open your browser's developer's console
+- Go to `http://localhost:3000/` to open the client

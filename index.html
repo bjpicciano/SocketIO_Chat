@@ -7,65 +7,25 @@
     <title>Socket.io Chat</title>
 
     <!--import the socket.io library-->
-    <script src="/socket.io/socket.io.js"></script>
+    <script src="/node_modules/socket.io-client/socket.io.js"></script>
+    <script src="/main.js"></script>
 
 </head>
 
 <body>
-    <h2>Open your developer console</h2>
+    <h2>Socket.io Chat</h2>
 
-    <script>
-        console.log("Please enter your name with setName('My Name')");
-        var name = "";
+    <div id="loginArea">
+        <input id="inputName" placeholder="Please enter name here..."/>
+        <button id="sendName" onclick="setName()">Enter</button>
+    </div>
 
-        // Sets your name and connects to the server
-        function setName(name) {
-            this.username = name;
-
-            // Here is where we connect to the server
-            this.socket = io.connect();
-
-            setUpSocketListeners();
-
-            return "use say('YOUR MESSAGE') to talk \n\n" +
-                    " check who is online with getOnlineUsers()"
-        }
-
-        function say (message) {
-            this.socket.emit('say', message);
-            return message
-        }
-
-        function getOnlineUsers() {
-            this.socket.emit('getOnlineUsers');
-
-            return "Online Users: "
-        }
-
-        // Declare listeners
-        function setUpSocketListeners() {
-            var self = this;
-
-            // When the server sends us a handshake we send one back, with our username.
-            this.socket.on('handshake', function () {
-                self.socket.emit('handshake', self.username)
-            });
-
-            this.socket.on('say', function (message) {
-               console.log(message);
-            });
-
-            this.socket.on('getOnlineUsers', function (users) {
-                var online = "";
-                for (var idx in users) {
-                    online += users[idx] + "\n"
-                }
-
-                console.log(online)
-            })
-        }
-
-    </script>
+    <div id ="messageArea" style="display:none;">
+        <input id="inputMessage" placeholder="type message here..."/>
+        <button id="sendMessage" onclick="say()">Send message</button> <br>
+        <button id="getOnlineUsers" onclick="getOnlineUsers()">Get online users</button>
+        <ul id="messages">Messages:</ul>
+    </div>
 </body>
 
 </html>
