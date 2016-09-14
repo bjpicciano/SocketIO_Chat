@@ -20,7 +20,7 @@ function say () {
     var message = messageField.value;
     messageField.value = "";
 
-    if (!message) message = "_";
+    if (!message) return window.alert("Please enter a message");
 
     appendToMessageList("me: " + message);
 
