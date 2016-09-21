@@ -3,37 +3,44 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
+// Serve our clients files from the base directory
 app.use(express.static(__dirname));
 
+/**
+ * Here is where we listen for connecting users.
+ */
 io.on('connection', function (socket) {
     socket.emit('handshake');
-    // socket.broadcast.emit('say', message);
     
     setEventHandlers(socket);
 });
 
 var sockets = {};
 
+/**
+ * This is where we set up our server's listeners.
+ * @param socket the client's socket we are dealing with
+ */
 function setEventHandlers(socket) {
     sockets[socket.id] = socket;
     
     socket.on('disconnect', function () {
-        var message = socket.username + " has disconnected ";
+        var disconnectMessage = "'" + socket.username + "' has disconnected ";
 
-        console.log(message);
-        socket.broadcast.emit('say', message);
+        console.log(disconnectMessage);
+        socket.broadcast.emit('say', disconnectMessage);
 
         delete sockets[socket.id];
 
         socket.disconnect();
     });
-
+    
     socket.on('handshake', function (name) {
         socket.username = name;
-        var message = socket.username + " has connected";
+        var connectMessage = "'" + socket.username + "' has connected";
 
-        console.log(message);
-        socket.broadcast.emit('say', message);
+        console.log(connectMessage);
+        socket.broadcast.emit('say', connectMessage, "gray");
     });
 
     socket.on('say', function (message) {
@@ -47,7 +54,9 @@ function setEventHandlers(socket) {
     socket.on('getOnlineUsers', function () {
         var users = [];
         for (var id in sockets) {
-            users.push(sockets[id].username);
+            if (sockets.hasOwnProperty(id)) {
+                users.push(sockets[id].username);
+            }
         }
         socket.emit('getOnlineUsers', users)
     })
