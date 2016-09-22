@@ -116,6 +116,9 @@ function setUpSocketListeners () {
         if (self.isConnected) {
             self.isConnected = false;
             hasConnection("lost connection: ")
+        } else if (self.isConnected == undefined) {
+            self.isConnected = false;
+            hasConnection("unable to reach server: ")
         }
     });
 
@@ -127,3 +130,16 @@ function setUpSocketListeners () {
         self.isConnected = true;
     });
 }
+
+/**
+ * listen for the keys to provide ease of use
+ */
+window.addEventListener("keydown", function (e) {
+    if (e.keyCode == "13" && this.isConnected != undefined) { // if we're already connected, send the message
+        document.getElementById('sendMessage').click();
+    } else if (e.keyCode == "13" && this.isConnected == undefined) { // if we don't have a connection, set our username and connect
+        document.getElementById('sendName').click();
+    } else { // with our other 2 cases handled, always provide focus to the message input box
+        document.getElementById('inputMessage').focus();
+    }
+});
