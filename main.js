@@ -137,7 +137,7 @@ function setUpSocketListeners () {
 window.addEventListener("keydown", function (e) {
     if (e.keyCode == "13" && this.isConnected != undefined) { // if we're already connected, send the message
         document.getElementById('sendMessage').click();
-    } else if (e.keyCode == "13" && this.isConnected == undefined) { // if we don't have a connection, set our username and connect
+    } else if (e.keyCode == "13" && this.isConnected == undefined && !this.username) { // if we don't have a connection, set our username and connect
         document.getElementById('sendName').click();
     } else { // with our other 2 cases handled, always provide focus to the message input box
         document.getElementById('inputMessage').focus();
