@@ -1,30 +1,54 @@
-<!doctype html>
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <title>Socket.io Chat</title>
 
-    <!--import the socket.io library-->
+    <!--import library files-->
     <script src="./node_modules/socket.io-client/socket.io.js"></script>
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <link href="./node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!--import our files-->
     <script src="./main.js"></script>
 </head>
 
 <body>
-    <h2>Socket.io Chat</h2>
+    <div class="col-sm-2 col-lg-3"></div>
+    <div class="panel-body col-sm-8 col-lg-6">
 
-    <div id="loginArea">
-        <input id="inputName" autofocus placeholder="Please enter your username..."/>
-        <button id="sendName" onclick="setName()">Enter</button>
-    </div>
+        <div id="loginArea">
 
-    <div id ="messageArea" style="display:none;">
-        <input id="inputMessage" placeholder="type message here..."/>
-        <button id="sendMessage" onclick="say()">Send message</button> <br>
-        <button id="getOnlineUsers" onclick="getOnlineUsers()">Get online users</button>
-        <ul id="messages">Messages:</ul>
+            <div class="col-sm-1 col-lg-2"></div>
+            <div class="col-sm-10 col-lg-8">
+                <h2>Socket.io Chat</h2>
+
+                <input class="col-xs-8" id="inputName" autofocus placeholder="Please enter your username..."/>
+                <button class="col-xs-3" id="sendName" onclick="setName()">Enter</button>
+            </div>
+            <div class="col-sm-1 col-lg-2"></div>
+        </div>
+
+        <div id ="messageArea" style="display:none;">
+            <h2>Socket.io Chat</h2>
+
+            <div class="">
+                <input class="col-sm-6" id="inputMessage" placeholder="type message here..." maxlength="300"/>
+                <button class="" id="sendMessage" onclick="say()">Send message</button>
+                <button class="" id="getOnlineUsers" onclick="getOnlineUsers()">Get online users</button><br>
+            </div>
+
+            <div class="row col-sm-12">
+                <div class="well">
+                    Messages:
+                    <ul id="messages" class="pre-scrollable"></ul>
+                </div>
+            </div>
+        </div>
     </div>
+    <div class="col-sm-2 col-lg-3"></div>
 </body>
 
 </html>

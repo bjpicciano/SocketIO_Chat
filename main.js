@@ -46,14 +46,18 @@ function appendToMessageList (message, color) {
     var li = document.createElement("li");
     li.appendChild(document.createTextNode(message));
 
+    var appender;
     if (color) {
         var span = document.createElement('span');
         span.style.color= color;
         span.appendChild(li);
-        ul.appendChild(span);
+        appender = span;
     } else {
-        ul.appendChild(li);
+        appender = li;
     }
+
+    // Append to the front of the ul to always show new messages on top
+    ul.insertBefore(appender, ul.childNodes[0]);
 }
 
 /**

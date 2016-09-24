@@ -9,7 +9,9 @@
   "author": "Brian Picciano",
   "dependencies": {
     "express": "*",
-    "socket.io": "*"
+    "socket.io": "*",
+    "bootstrap": "*",
+    "jquery": "*"
   },
   "license": "MIT"
 }
